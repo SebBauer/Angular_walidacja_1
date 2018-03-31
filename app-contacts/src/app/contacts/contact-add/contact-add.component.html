@@ -1,0 +1,59 @@
+<app-header>
+  <p content>Dodawanie kontaktu</p>
+</app-header>
+
+<form [formGroup]="contactForm">
+  
+  <div class="row form-group">
+    
+    <div class="col-sm-12 col-xl-4">
+
+      <label>Nazwisko</label>
+      <input formControlName="surname" type="text" class="form-control" placeholder="Nazwisko" autofocus>
+      
+      <p *ngIf="!contactForm.get('surname').valid && contactForm.get('surname').value && contactForm.get('surname').touched" 
+      class="error">Nazwisko musi zaczynać się od wielkiej litery oraz zawierać od 3 do 15 liter</p>
+
+    </div>
+
+    <div class="col-sm-12 col-xl-4">
+
+      <label>Imię</label>
+      <input formControlName="firstName" type="text" class="form-control" placeholder="Imię">
+
+      <p *ngIf="!contactForm.get('firstName').valid && contactForm.get('firstName').value && contactForm.get('firstName').touched" 
+      class="error">Imię musi zaczynać się od wielkiej litery oraz zawierać od 3 do 15 liter</p>
+
+    </div>
+
+    <div class="col-sm-12 col-xl-4">
+
+        <label>Nr telefonu</label>
+        <input formControlName="phoneNumber" id="PhoneNumber" type="text" class="form-control" placeholder="Nr telefonu">
+  
+        <p *ngIf="!contactForm.get('phoneNumber').valid && contactForm.get('phoneNumber').value && contactForm.get('phoneNumber').touched"
+        class="error">Numer telefonu musi 9 cyfr</p>
+        
+    </div>
+
+  </div>
+
+  <div class="row">
+
+    <div class="col-sm-12">
+        
+      <button (click)="addContact()" [disabled]="contactForm.invalid" class="btn btn-sm btn-info">Zapisz</button>
+      <button (click)="contactForm.reset()" class="btn btn-sm btn-secondary">Reset</button>
+      <button class="btn btn-sm btn-dark" [routerLink]="['/contacts']">Wstecz</button>
+      
+    </div>
+
+  </div>
+
+</form>
+
+<pre>{{ contactForm.value | json }}</pre>
+<pre>{{ contactForm.status | json }}</pre>
+<pre>Stan walidacji nazwiska: {{ contactForm.get('surname').valid }}</pre>
+<pre>Stan walidacji imienia: {{ contactForm.get('firstName').valid }}</pre>
+<pre>Stan walidacji numeru telefonu: {{ contactForm.get('phoneNumber').valid }}</pre>
